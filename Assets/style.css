@@ -1,0 +1,83 @@
+*{
+    margin:0
+
+}
+.highscores{
+    display: flex;
+    color:purple;
+    margin: 10px;
+    margin-top: 10px;
+}
+
+.questionArea {
+    display:flex;
+    position:relative;
+    flex-direction: column;
+    text-align: center;
+    flex-wrap: wrap;
+    border:solid;
+    border-radius: 5px;
+    max-width: 30%;
+    justify-content: center;
+    align-content:center;
+    margin: auto;
+    margin-top:150px;
+    padding: 15px;
+
+}
+.timer {
+    display: flex;
+    position:fixed;
+    right:10px;
+    top:10px
+    
+}
+.startBtn{
+    background-color: rgb(108, 14, 139);
+    border:solid;
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+    margin:auto;
+    margin-top:30px;
+    margin-bottom:10px;
+    max-width: 100px;
+    min-width: 100px;
+    margin:auto;
+}
+button {
+    background-color: rgb(108, 14, 139);
+    border:solid;
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+    margin-top:15px;
+    margin-bottom:10px;
+    max-width: 200px;
+    min-width: 200px;
+    margin:auto;
+}
+#content {
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    margin: auto;
+}
+#initialSub {
+    background-color: rgb(108, 14, 139);
+    border:solid;
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+    margin:auto;
+    margin-top:30px;
+    margin-bottom:10px;
+    min-width: 100px;
+    margin:auto;
+}
+#initialsText {
+    font-size: larger;
+    font-weight: bolder;
+};
