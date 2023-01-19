@@ -65,19 +65,35 @@ button {
     align-content: center;
     margin: auto;
 }
-#initialSub {
-    background-color: rgb(108, 14, 139);
-    border:solid;
-    border-radius: 5px;
-    color: white;
-    padding: 5px;
-    margin:auto;
-    margin-top:30px;
-    margin-bottom:10px;
-    min-width: 100px;
-    margin:auto;
-}
+
 #initialsText {
     font-size: larger;
     font-weight: bolder;
-};
+}
+
+#saveBtn {
+    display:none;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+p {
+    display:flex;
+    background-color: rgb(108, 14, 139);
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-style: solid;
+    min-width: 200px;
+    color: white;
+    font-size: larger;
+    font-weight: bolder;
+}
+main {
+    font-size: large;
+    margin: 10px;
+}

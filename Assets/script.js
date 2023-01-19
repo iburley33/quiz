@@ -1,16 +1,14 @@
-
 var timeEl = document.querySelector(".timer-count");
-var submitEl = document.querySelector("#initialSub");
 var startBtn = document.querySelector("#startBtn");
 var questionArea = document.querySelector(".questionArea");
 var paragraph = document.querySelector('p');
 var content = document.querySelector('#content');
 var question = document.querySelector('.question');
 var correctBtn = document.querySelector('.correct');
-var initials = document.getElementById('initialEntry');
+var initials;
 var saveBtn = document.querySelector("#saveBtn");
 var highscoresBtn = document.querySelector(".highscores");
-var scores = [];
+var pastScores = JSON.parse(localStorage.getItem('playerScore'));
 var questions = [
     {
         quizQ: "Which of the following is calling a function?",
@@ -18,12 +16,12 @@ var questions = [
         correct: 'someFunction()',
     },
     {
-        quizQ: "What is bootstrap",
+        quizQ: "What is bootstrap?",
         answers: ["css Framework", "pirate of the carribean", "shoe apparatus", "html Framework"],
         correct: "css Framework",
     },
     {
-        quizQ: "What symbol designates an object",
+        quizQ: "What symbol designates an object?",
         answers: ['{}','[]','()','<>'],
         correct: '{}',
     },
@@ -68,38 +66,52 @@ var pointsEarned = 0;
 var secondsLeft = 60;
 
 function hideBtn() {
-    startBtn.style.visibility = "hidden";
+    startBtn.style.display = "none";
 };
-
-
+function hideSave() {
+    saveBtn.style.display = "none";
+};
+function getValues(event) {
+    event.preventDefault()
+    var n = document.forms[scoreForm][initials].value;
+    alert(n);
+};
 function renderScores() {
-    scores.push()
-    questionArea.innerHTML = "";
+    content.innerHTML = "<h1>High Scores</h1>";
   
-    for (var i = 0; i < scores.length; i++) {
-      var scoreX = scores[i];
-  
-      var li = document.createElement("li");
-      li.textContent = scoreX;
-      li.setAttribute("data-index", i);
-  
-      questionArea.appendChild(li);
+    for (var i = 0; i < pastScores.length; i++) {
+      var scoreX = pastScores[i];
+
+      var div = document.createElement("div");
+      div.setAttribute("class", "container");
+      content.appendChild(div);
+
+      var pTag1 = document.createElement("p");
+      pTag1.textContent = scoreX.player;
+      var pTag2 = document.createElement("p");
+      pTag2.textContent = scoreX.score;
+
+
+      div.appendChild(pTag1);
+      div.appendChild(pTag2);
+
+      hideBtn();
+      hideSave();
     }
 };
 
-function logScores() {
-    localStorage.setItem("playerScore", JSON.stringify(scores))
-    console.log(scores);
-};
-
-function storeScores(event) {
+function saveScores(event) {
     event.preventDefault();
+    console.log(initials);
+    console.log(pastScores);
     var newScore = {
-        player: initialsText.value,
+        player: initials.value,
         score: pointsEarned,
     };
-    scores.push(newScore);
-    logScores();
+    console.log(newScore);
+    pastScores.push(newScore);
+    localStorage.setItem("playerScore", JSON.stringify(pastScores));
+    renderScores();
 };
 
 var startTimer = function() {
@@ -116,16 +128,17 @@ var startTimer = function() {
 };
 
 var gameOver = function() {
-    questionArea.innerHTML =
-        `<form action="/action_page.php">
+    content.innerHTML =
+        `<form name="scoreForm">
             <label for="initials" id="initialsText">Enter your initials here:</label><br>
             <input type="text" id="initials" name="initials"><br>
-            <input type="submit" class= submit.El id="initialSub" value="Submit you score!">
+            
         </form> 
         <h5>Your Score</h5>`+ pointsEarned;
+    initials = document.getElementById('initials');
     secondsLeft = 1;
-
-    questionArea.addEventListener("submit", storeScores());
+    saveBtn.style.display="block";
+    document.addEventListener("submit", saveScores)
 };
 
 var startQuiz = function() {
@@ -159,24 +172,24 @@ startBtn.addEventListener("click", startTimer);
 
 function checkAnswer(event) {
     var clickedanswer = event.target;
-    if(clickedanswer.innerText===questions[currentIndex].correct) {
-        console.log("correct")
+    if(clickedanswer.tagName==="BUTTON" && clickedanswer.innerText===questions[currentIndex].correct && currentIndex <= 10) {
         pointsEarned += 10;
-    }else {
-        console.log("incorrect")
-        secondsLeft -= 10
+        nextQuestion();
+    }else if(clickedanswer.tagName==="BUTTON" && clickedanswer.innerText!==questions[currentIndex].correct && currentIndex <= 10) {
+        secondsLeft -= 10;
+        nextQuestion();
     };
-    nextQuestion();
 };
 
 content.addEventListener("click", (e)=> checkAnswer(e));
 
-
+saveBtn.addEventListener("click", (e)=> saveScores(e));
 
 highscoresBtn.addEventListener("click", function(event) {
-        storeScores();
+        renderScores();
     });
 
 // to solve
 // Need to get the button on the gameOver page to function on click
 // Need scores array to push objects from local storage
+// Any div click running checkAnswer
