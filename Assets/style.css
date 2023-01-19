@@ -8,6 +8,10 @@
     margin: 10px;
     margin-top: 10px;
 }
+.highscores:hover {
+    color: rgb(64, 64, 156);
+    cursor: pointer;
+}
 
 .questionArea {
     display:flex;
@@ -45,6 +49,10 @@
     min-width: 100px;
     margin:auto;
 }
+.startBtn:hover {
+    background-color: rgb(64, 64, 156);
+    cursor: pointer;
+}
 button {
     background-color: rgb(108, 14, 139);
     border:solid;
@@ -56,6 +64,10 @@ button {
     max-width: 200px;
     min-width: 200px;
     margin:auto;
+}
+button:hover {
+    background-color: rgb(64, 64, 156);
+    cursor: pointer;
 }
 #content {
     display:flex;
@@ -73,6 +85,10 @@ button {
 
 #saveBtn {
     display:none;
+}
+#saveBtn:hover {
+    background-color: rgb(64, 64, 156);
+    cursor: pointer;
 }
 
 .container {
